@@ -37,7 +37,8 @@ public class UserService implements UserDetailsService {
     public String signUpUser(User user){
         boolean userExists = userRepository.findUserByEmail(user.getEmail())
                 .isPresent();
-        if (userExists){
+        if (userExists) {
+            //TODO: if email not confirmed send confirmation email.
             throw new IllegalStateException("email already taken");
         }
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
